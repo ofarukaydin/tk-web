@@ -7,9 +7,31 @@
     "build": "next build",
     "start": "next start"
   },
+  "babelMacros": {
+    "twin": {
+      "config": "tailwind.config.js",
+      "preset": "emotion",
+      "debugProp": true,
+      "debugPlugins": false,
+      "debug": false
+    }
+  },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
+    "@tailwindcss/custom-forms": "^0.2.1",
     "next": "9.5.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "twin.macro": "^1.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.0",
+    "@types/react": "^16.9.46",
+    "babel-plugin-auto-import": "^1.1.0",
+    "tailwindcss": "^1.7.2",
+    "typescript": "^3.9.7",
+    "typescript-plugin-tw-template": "^2.0.1"
   }
 }
