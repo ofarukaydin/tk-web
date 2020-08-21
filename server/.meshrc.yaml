@@ -1,0 +1,6 @@
+sources:
+  - name: Tarim Kredi
+    handler:
+      openapi:
+        source: https://edakik.azurewebsites.net/swagger/v1/swagger.json
+        baseUrl: https://edakik.azurewebsites.net

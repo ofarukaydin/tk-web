@@ -1,9 +1,16 @@
 // import App from "next/app";
+import { createClient, Provider } from "urql";
 import type { AppProps /*, AppContext */ } from "next/app";
 import "tailwindcss/dist/base.min.css";
 
+const client = createClient({ url: "http://localhost:4000/graphql" });
+
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider value={client}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

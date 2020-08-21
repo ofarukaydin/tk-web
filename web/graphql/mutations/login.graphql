@@ -1,0 +1,28 @@
+mutation Login($username: String!, $password: String!, $userTypeId: Int!) {
+  postApiV1AuthenticationValidateuser(
+    validateUserRequestDTOInput: {
+      username: $username
+      password: $password
+      userTypeId: $userTypeId
+    }
+  ) {
+    result
+    response {
+      id
+      email
+      username
+      addressId
+      merchantBranchId
+      name
+      surname
+      phoneNumber
+      refreshToken
+      token
+      tokenExpireDate
+    }
+    messages {
+      code
+      message
+    }
+  }
+}
