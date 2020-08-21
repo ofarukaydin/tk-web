@@ -1,0 +1,12 @@
+query GetBaseCategories {
+  getApiV1ProductGetbasecategories {
+    response {
+      baseCategories {
+        categoryUrl
+        description
+        icon
+        name
+      }
+    }
+  }
+}

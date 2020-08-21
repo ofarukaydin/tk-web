@@ -2,13 +2,22 @@
 import { createClient, Provider } from "urql";
 import type { AppProps /*, AppContext */ } from "next/app";
 import "tailwindcss/dist/base.min.css";
+import Header from "components/header";
+import Footer from "components/footer";
+import "twin.macro";
 
 const client = createClient({ url: "http://localhost:4000/graphql" });
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
-      <Component {...pageProps} />
+      <div tw="min-h-screen flex flex-col ">
+        <Header />
+        <div tw="container mx-auto flex-grow">
+          <Component {...pageProps} />
+        </div>
+        <Footer />
+      </div>
     </Provider>
   );
 }

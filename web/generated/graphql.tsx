@@ -1645,6 +1645,23 @@ export type UpdateCarrierTrackingInfoRequestDtoInput = {
   longitude?: Maybe<Scalars['Float']>;
 };
 
+export type GetBaseCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBaseCategoriesQuery = (
+  { __typename?: 'Query' }
+  & { getApiV1ProductGetbasecategories?: Maybe<(
+    { __typename?: 'GetBaseCategoriesResponseDTOOperationResultDTO' }
+    & { response?: Maybe<(
+      { __typename?: 'Response33' }
+      & { baseCategories?: Maybe<Array<Maybe<(
+        { __typename?: 'GetCategoryReponseItemDTO' }
+        & Pick<GetCategoryReponseItemDto, 'categoryUrl' | 'description' | 'icon' | 'name'>
+      )>>> }
+    )> }
+  )> }
+);
+
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -1668,6 +1685,24 @@ export type LoginMutation = (
 );
 
 
+export const GetBaseCategoriesDocument = gql`
+    query GetBaseCategories {
+  getApiV1ProductGetbasecategories {
+    response {
+      baseCategories {
+        categoryUrl
+        description
+        icon
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useGetBaseCategoriesQuery(options: Omit<Urql.UseQueryArgs<GetBaseCategoriesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetBaseCategoriesQuery>({ query: GetBaseCategoriesDocument, ...options });
+};
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!, $userTypeId: Int!) {
   postApiV1AuthenticationValidateuser(validateUserRequestDTOInput: {username: $username, password: $password, userTypeId: $userTypeId}) {
