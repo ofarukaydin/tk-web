@@ -27,6 +27,7 @@
     "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-image-gallery": "^1.0.8",
     "twin.macro": "^1.7.0",
     "urql": "^1.10.0"
   },
@@ -37,6 +38,7 @@
     "@graphql-codegen/typescript-urql": "^2.0.1",
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.46",
+    "@types/react-image-gallery": "^1.0.0",
     "tailwindcss": "^1.7.2",
     "typescript": "^3.9.7",
     "typescript-plugin-tw-template": "^2.0.1"

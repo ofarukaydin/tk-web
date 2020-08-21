@@ -2,6 +2,7 @@
 import { createClient, Provider } from "urql";
 import type { AppProps /*, AppContext */ } from "next/app";
 import "tailwindcss/dist/base.min.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import Header from "components/header";
 import Footer from "components/footer";
 import "twin.macro";

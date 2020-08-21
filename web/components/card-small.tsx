@@ -9,7 +9,7 @@ type PropTypes = {
 
 const SmallCard = ({ imageSrc = "/cherry.png", title, href }: PropTypes) => {
   return (
-    <div tw="rounded-xl shadow-tk2">
+    <div tw="rounded-xl shadow-tk2 w-full">
       <div tw="p-4">
         <div tw="flex justify-center items-center">
           <img src={imageSrc} alt="product" />
