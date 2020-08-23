@@ -8,6 +8,8 @@ import SlideShow from "components/slideshow";
 import { withUrqlSsr } from "util/client";
 import Wrapper from "components/layout/wrapper";
 import Layout from "components/layout";
+import Categories from "components/categories";
+import MyCart from "components/my-cart";
 
 const Index = () => {
   const [response] = useGetBaseCategoriesQuery();
@@ -27,7 +29,7 @@ const Index = () => {
 
   return (
     <Layout container="none">
-      <div tw="flex flex-wrap -mx-2 mt-4 flex-col">
+      <div tw="flex flex-wrap -mx-2 flex-col">
         <Wrapper>
           <div tw="w-full">
             <SlideShow />

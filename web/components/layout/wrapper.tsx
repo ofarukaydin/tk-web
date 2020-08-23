@@ -19,6 +19,7 @@ const Wrapper = ({ children, container = "normal" }: PropTypes) => {
         container === "normal" && normalVariant,
         container === "small" && smallVariant,
       ]}
+      tw="my-6"
     >
       {children}
     </div>
