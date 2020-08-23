@@ -15,6 +15,12 @@ const images = [
   },
 ];
 
-const SlideShow = () => <ImageGallery items={images} />;
+const SlideShow = () => (
+  <ImageGallery
+    showFullscreenButton={false}
+    showPlayButton={false}
+    items={images}
+  />
+);
 
 export default SlideShow;

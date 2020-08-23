@@ -3,13 +3,13 @@ import "twin.macro";
 type PropTypes = {
   title: string;
   imgSrc: string;
-  gradient: string;
+  bg: string;
 };
 
 const FeaturedCard = (props: PropTypes) => (
   <div
     css={{
-      background: props.gradient,
+      background: props.bg,
       borderRadius: 12,
     }}
     tw="flex px-12 h-48 shadow-tk1"
@@ -19,7 +19,7 @@ const FeaturedCard = (props: PropTypes) => (
       <button tw="rounded-xl bg-white w-20 h-8 mt-4 hover:cursor-pointer hover:bg-black">
         <span
           css={{
-            background: props.gradient,
+            background: props.bg,
             backgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}

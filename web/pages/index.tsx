@@ -5,8 +5,9 @@ import { useGetBaseCategoriesQuery } from "generated/graphql";
 import AddCard from "components/card-add";
 import AdHome from "components/ad-home";
 import SlideShow from "components/slideshow";
+import { withUrql } from "util/client";
 
-export default function Home() {
+const Index = () => {
   const [response] = useGetBaseCategoriesQuery();
 
   const categories = (
@@ -31,19 +32,19 @@ export default function Home() {
       <div tw="grid grid-cols-3 gap-4 mt-8">
         <FeaturedCard
           imgSrc="/wmelon.png"
-          gradient="linear-gradient(66.56deg, #AED238 0%, #C8DE80 97.34%)"
+          bg="linear-gradient(66.56deg, #AED238 0%, #C8DE80 97.34%)"
           title="Taze meyve ve sebzeler"
         />
 
         <FeaturedCard
           imgSrc="/hamburger.png"
-          gradient="linear-gradient(66.56deg, #E79324 0%, #FFE193 97.34%)"
+          bg="linear-gradient(66.56deg, #E79324 0%, #FFE193 97.34%)"
           title="Hamburger Zamanı"
         />
 
         <FeaturedCard
           imgSrc="/kavrulmus.png"
-          gradient="linear-gradient(66.56deg, #51AD56 0%, #96E88A 97.34%)"
+          bg="linear-gradient(66.56deg, #51AD56 0%, #96E88A 97.34%)"
           title="Çifte Kavrulmuş"
         />
       </div>
@@ -110,4 +111,6 @@ export default function Home() {
       <AdHome />
     </div>
   );
-}
+};
+
+export default withUrql(Index);

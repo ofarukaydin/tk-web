@@ -4,6 +4,8 @@ import InputField from "components/input-field";
 import "twin.macro";
 import { useLoginMutation } from "generated/graphql";
 import { useRouter } from "next/dist/client/router";
+import { setToken } from "util/auth";
+import { withUrql } from "util/client";
 
 const initialValues = {
   username: "",
@@ -26,6 +28,10 @@ const Login = () => {
         onSubmit={async (values, { setErrors }) => {
           const response = await login({ ...values, userTypeId: 3 });
           if (response.data?.postApiV1AuthenticationValidateuser?.result) {
+            setToken(
+              response.data.postApiV1AuthenticationValidateuser.response
+                ?.token || ""
+            );
             router.push("/");
           }
         }}
@@ -66,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withUrql(Login);

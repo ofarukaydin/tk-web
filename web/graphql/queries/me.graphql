@@ -1,0 +1,20 @@
+# Write your query or mutation here
+query Me {
+  getApiV1AuthenticationGetuserdetails {
+    result
+    response {
+      addressId
+      email
+      id
+      merchantBranchId
+      name
+      phoneNumber
+      surname
+      username
+    }
+    messages {
+      code
+      message
+    }
+  }
+}
