@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { graphqlHTTP } from "express-graphql";
 import { findAndParseConfig } from "@graphql-mesh/config";
 import { getMesh } from "@graphql-mesh/runtime";
 import express from "express";
@@ -10,14 +10,19 @@ async function main() {
   const meshConfig = await findAndParseConfig();
   const { schema, contextBuilder } = await getMesh(meshConfig);
 
-  const apolloServer = new ApolloServer({
-    schema,
-    context: contextBuilder,
-  });
-  apolloServer.applyMiddleware({
-    app,
-    cors: false,
-  });
+  app.use(
+    "/graphql/",
+    graphqlHTTP(async (req) => ({
+      schema,
+      context: await contextBuilder({
+        headers: { authorization: req.headers.authorization },
+      }),
+      graphiql: {
+        headerEditorEnabled: true,
+      },
+    }))
+  );
+
   app.listen(4000);
   console.info(`🚀 Server ready at port 4000`);
 }
