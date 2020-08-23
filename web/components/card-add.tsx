@@ -25,7 +25,10 @@ const PlusBox = () => (
 
 const AddCard = (props: PropTypes) => {
   return (
-    <div css={{ height: 300 }} tw="relative rounded-lg shadow-tk2 w-full">
+    <div
+      css={{ height: 300 }}
+      tw="relative rounded-lg shadow-tk2 w-full bg-white flex flex-col justify-between pb-4"
+    >
       <div
         css={{ top: 10, right: 10 }}
         tw="hover:cursor-pointer absolute p-2 shadow-tk1 rounded-lg"

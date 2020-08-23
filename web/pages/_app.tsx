@@ -1,14 +1,9 @@
 import type { AppProps /*, AppContext */ } from "next/app";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "tailwindcss/dist/base.min.css";
-import Layout from "components/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
+  return <Component {...pageProps} />;
 }
 
 // Only uncomment this method if you have blocking data requirements for
