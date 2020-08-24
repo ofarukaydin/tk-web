@@ -1,7 +1,6 @@
 import "twin.macro";
 import Link from "next/link";
 import { Maybe, SubCategoryWithProductsDto } from "generated/graphql";
-import { useRouter } from "next/router";
 
 type CategoryItem = {
   name: string;
@@ -11,29 +10,27 @@ type CategoryItem = {
 
 type PropTypes = {
   items: Array<Maybe<SubCategoryWithProductsDto>>;
-  subTitle?: string;
+  subTitle?: string | null;
   title: string;
+  baseCategoryId?: string;
 };
 
 const NavItem = ({ name, url, count }: CategoryItem) => (
   <li tw="py-4 px-6 ">
     <Link href="/category/[...param]" as={url}>
       <a>
-        {name} {count! > 0 && <span tw="text-green-500">({count})</span>}
+        {name} {count! > 0 && <span tw="text-green-500">({count})</span>}{" "}
       </a>
     </Link>
   </li>
 );
 
-const SideNav = ({ items, subTitle, title }: PropTypes) => {
-  const router = useRouter();
-  const baseCategoryIdFromQuery = router.query?.param?.[0];
-
+const SideNav = ({ items, subTitle, title, baseCategoryId }: PropTypes) => {
   const navItems = items.map((el) => (
     <NavItem
       key={el?.id}
       name={el?.name || ""}
-      url={`/category/${baseCategoryIdFromQuery}/${el?.id}`}
+      url={`/category/${baseCategoryId}/${el?.id}`}
       count={el?.products?.length}
     />
   ));

@@ -2,7 +2,7 @@ import "twin.macro";
 import { Maybe, ProductItemListDto } from "generated/graphql";
 
 type PropTypes = {
-  product: Maybe<ProductItemListDto>;
+  product: Maybe<ProductItemListDto> | undefined;
 };
 
 const PlusBox = () => (

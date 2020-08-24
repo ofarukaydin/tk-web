@@ -27,12 +27,16 @@ const CategoriesPage = () => {
       ?.getApiV1ProductGetsubcategorieswithproductsandcategory?.response
       ?.data || [];
 
+  const concatinatedProducts = subCategories.flatMap((el) => el?.products);
+
   const currentSubCategory = subCategories.filter(
     (el) => el?.id === subCategoryIdFromQuery
   )[0];
 
   const productsInCurrentSubCategory = (
-    currentSubCategory?.products || []
+    currentSubCategory?.products ||
+    concatinatedProducts ||
+    []
   ).map((product) => (
     <AddCard key={product?.productItemId} product={product} />
   ));
@@ -40,23 +44,28 @@ const CategoriesPage = () => {
   return (
     <Layout container="none">
       <Wrapper>
-        <div tw="flex">
-          <div tw="w-1/3">
-            <SideNav
-              title="Kategoriler"
-              subTitle={currentSubCategory?.name || ""}
-              items={subCategories}
-            />
-            <div tw="mt-6">
-              <MyCart />
+        {baseCategoryIdFromQuery ? (
+          <div tw="flex">
+            <div tw="w-1/3">
+              <SideNav
+                title="Kategoriler"
+                subTitle={currentSubCategory?.name}
+                items={subCategories}
+                baseCategoryId={baseCategoryIdFromQuery}
+              />
+              <div tw="mt-6">
+                <MyCart />
+              </div>
+            </div>
+            <div tw="w-2/3 ml-6">
+              <div tw="grid grid-cols-4 gap-4 w-full">
+                {productsInCurrentSubCategory}
+              </div>
             </div>
           </div>
-          <div tw="w-2/3 ml-6">
-            <div tw="grid grid-cols-4 gap-4 w-full">
-              {productsInCurrentSubCategory}
-            </div>
-          </div>
-        </div>
+        ) : (
+          <div tw="text-center font-bold text-red-650">Geçersiz kategori</div>
+        )}
       </Wrapper>
     </Layout>
   );
