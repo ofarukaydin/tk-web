@@ -1,6 +1,6 @@
 import "twin.macro";
 import Layout from "components/layout";
-import Categories from "components/categories";
+import Categories from "components/sidenav";
 import MyCart from "components/my-cart";
 
 type PropTypes = {};

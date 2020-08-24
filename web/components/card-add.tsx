@@ -1,11 +1,8 @@
 import "twin.macro";
+import { Maybe, ProductItemListDto } from "generated/graphql";
 
 type PropTypes = {
-  productImg: string;
-  name: string;
-  quantity: number;
-  price: number;
-  discountedPrice: number;
+  product: Maybe<ProductItemListDto>;
 };
 
 const PlusBox = () => (
@@ -23,29 +20,30 @@ const PlusBox = () => (
   </svg>
 );
 
-const AddCard = (props: PropTypes) => {
+const AddCard = ({ product }: PropTypes) => {
   return (
-    <div
-      css={{ height: 300 }}
-      tw="relative rounded-lg shadow-tk2 w-full bg-white flex flex-col justify-between pb-4"
-    >
+    <div tw="relative rounded-lg shadow-tk2 w-full bg-white flex flex-col justify-between pb-4">
       <div
         css={{ top: 10, right: 10 }}
-        tw="hover:cursor-pointer absolute p-2 shadow-tk1 rounded-xl"
+        tw="hover:cursor-pointer absolute p-2 shadow-tk1 rounded-xl hover:bg-gray-100"
       >
         <PlusBox />
       </div>
-      <div tw="flex justify-center items-center">
-        <img src={props.productImg} alt={props.name} />
+      <div tw="flex justify-center items-center p-4">
+        <img
+          tw="object-cover w-full h-full block"
+          src={product?.imageUrl || ""}
+          alt={product?.name || ""}
+        />
       </div>
-      <div tw="pl-2">
+      <div tw="pl-4">
         <div tw="leading-5">
-          <p tw="text-gray-600 text-2xl font-bold">{props.name}</p>
-          <p tw="text-xs">{props.quantity} Adet</p>
+          <p tw="text-gray-600 text-2xl font-bold">{product?.name}</p>
+          <p tw="text-xs">{product?.unit} Adet</p>
         </div>
         <div tw="mt-2 leading-5">
-          <p tw="text-xs line-through">{props.price}₺</p>
-          <p tw="text-lg text-green-600">{props.discountedPrice}₺</p>
+          <p tw="text-xs line-through">{product?.price}₺</p>
+          <p tw="text-lg text-green-600">{(product?.price || 0) * 1.5}₺</p>
         </div>
       </div>
     </div>

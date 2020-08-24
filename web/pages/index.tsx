@@ -1,31 +1,42 @@
 import "twin.macro";
 import FeaturedCard from "components/featured-card";
 import SmallCard from "components/card-small";
-import { useGetBaseCategoriesQuery } from "generated/graphql";
+import {
+  useGetBaseCategoriesQuery,
+  useProductListQuery,
+} from "generated/graphql";
 import AddCard from "components/card-add";
 import AdHome from "components/ad-home";
 import SlideShow from "components/slideshow";
 import { withUrqlSsr } from "util/client";
-import Wrapper from "components/layout/wrapper";
 import Layout from "components/layout";
-import Categories from "components/categories";
-import MyCart from "components/my-cart";
+import Wrapper from "components/layout/wrapper";
 
 const Index = () => {
-  const [response] = useGetBaseCategoriesQuery();
+  const [baseCategoriesResponse] = useGetBaseCategoriesQuery();
+  const [productListResponse] = useProductListQuery({
+    variables: { merchantBranchId: 3, parentCategoryId: 1 },
+  });
 
   const categories = (
-    response.data?.getApiV1ProductGetbasecategories?.response?.baseCategories ||
-    []
+    baseCategoriesResponse.data?.getApiV1ProductGetbasecategories?.response
+      ?.baseCategories || []
   ).map((el) => (
-    <div key={el?.name} tw="my-2 px-2 w-1/6">
-      <SmallCard
-        title={el?.name || ""}
-        href={el?.categoryUrl || ""}
-        imageSrc={el?.icon || ""}
-      />
-    </div>
+    <SmallCard
+      key={el?.name}
+      title={el?.name || ""}
+      href={el?.categoryUrl || ""}
+      imageSrc={el?.icon || ""}
+    />
   ));
+
+  const showCase = (
+    productListResponse.data
+      ?.getApiV1ProductGetsubcategorieswithproductsandcategory?.response
+      ?.data?.[0]?.products || []
+  ).map((product) => {
+    return <AddCard key={product?.productItemId} product={product} />;
+  });
 
   return (
     <Layout container="none">
@@ -55,70 +66,14 @@ const Index = () => {
             />
           </div>
 
-          <div tw="grid grid-cols-6 gap-4 w-full mt-8">
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-            <SmallCard title="Meyve & Sebze" href="" />
-          </div>
+          <div tw="grid grid-cols-6 gap-4 w-full mt-8">{categories}</div>
         </Wrapper>
         <div
           css={{ backgroundColor: "#F1F8F1" }}
           tw="flex items-center justify-center mt-4"
         >
           <Wrapper>
-            <div tw="grid grid-cols-6 gap-4 w-full my-8">
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-              <AddCard
-                productImg="/ananas.png"
-                name="Ananas"
-                quantity={1}
-                price={15.99}
-                discountedPrice={14.3}
-              />
-            </div>
+            <div tw="grid grid-cols-6 gap-4 w-full my-8">{showCase}</div>
           </Wrapper>
         </div>
 

@@ -40,7 +40,7 @@ const MyCart = ({}: PropTypes) => {
           </div>
         </div>
       </div>
-      <div tw="bg-green-600 text-white font-bold uppercase py-6 rounded-b-xl text-center">
+      <div tw="hover:cursor-pointer hover:bg-green-900 bg-green-600 text-white font-bold uppercase py-6 rounded-b-xl text-center">
         Sepetin Tamamını Gör
       </div>
     </div>

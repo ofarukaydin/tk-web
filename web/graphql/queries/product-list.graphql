@@ -1,0 +1,43 @@
+query ProductList(
+  $merchantBranchId: BigInt!
+  $orderBy: String
+  $orderDir: OrderDir
+  $pageIndex: Int
+  $pageSize: Int
+  $parentCategoryId: BigInt
+) {
+  getApiV1ProductGetsubcategorieswithproductsandcategory(
+    merchantBranchId: $merchantBranchId
+    orderBy: $orderBy
+    orderDir: $orderDir
+    pageIndex: $pageIndex
+    pageSize: $pageSize
+    parentCategoryId: $parentCategoryId
+  ) {
+    result
+    messages {
+      code
+      message
+    }
+    response {
+      pageCount
+      pageIndex
+      pageSize
+      totalCount
+      data {
+        id
+        name
+        products {
+          brand
+          imageUrl
+          name
+          price
+          productId
+          productItemId
+          sku
+          unit
+        }
+      }
+    }
+  }
+}

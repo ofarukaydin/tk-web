@@ -1702,6 +1702,39 @@ export type MeQuery = (
   )> }
 );
 
+export type ProductListQueryVariables = Exact<{
+  merchantBranchId: Scalars['BigInt'];
+  orderBy?: Maybe<Scalars['String']>;
+  orderDir?: Maybe<OrderDir>;
+  pageIndex?: Maybe<Scalars['Int']>;
+  pageSize?: Maybe<Scalars['Int']>;
+  parentCategoryId?: Maybe<Scalars['BigInt']>;
+}>;
+
+
+export type ProductListQuery = (
+  { __typename?: 'Query' }
+  & { getApiV1ProductGetsubcategorieswithproductsandcategory?: Maybe<(
+    { __typename?: 'SubCategoryWithProductsDTOPagingOperationDTO' }
+    & Pick<SubCategoryWithProductsDtoPagingOperationDto, 'result'>
+    & { messages?: Maybe<Array<Maybe<(
+      { __typename?: 'OperationResultMessage' }
+      & Pick<OperationResultMessage, 'code' | 'message'>
+    )>>>, response?: Maybe<(
+      { __typename?: 'Response29' }
+      & Pick<Response29, 'pageCount' | 'pageIndex' | 'pageSize' | 'totalCount'>
+      & { data?: Maybe<Array<Maybe<(
+        { __typename?: 'SubCategoryWithProductsDTO' }
+        & Pick<SubCategoryWithProductsDto, 'id' | 'name'>
+        & { products?: Maybe<Array<Maybe<(
+          { __typename?: 'ProductItemListDTO' }
+          & Pick<ProductItemListDto, 'brand' | 'imageUrl' | 'name' | 'price' | 'productId' | 'productItemId' | 'sku' | 'unit'>
+        )>>> }
+      )>>> }
+    )> }
+  )> }
+);
+
 
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!, $userTypeId: Int!) {
@@ -1773,4 +1806,39 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const ProductListDocument = gql`
+    query ProductList($merchantBranchId: BigInt!, $orderBy: String, $orderDir: OrderDir, $pageIndex: Int, $pageSize: Int, $parentCategoryId: BigInt) {
+  getApiV1ProductGetsubcategorieswithproductsandcategory(merchantBranchId: $merchantBranchId, orderBy: $orderBy, orderDir: $orderDir, pageIndex: $pageIndex, pageSize: $pageSize, parentCategoryId: $parentCategoryId) {
+    result
+    messages {
+      code
+      message
+    }
+    response {
+      pageCount
+      pageIndex
+      pageSize
+      totalCount
+      data {
+        id
+        name
+        products {
+          brand
+          imageUrl
+          name
+          price
+          productId
+          productItemId
+          sku
+          unit
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useProductListQuery(options: Omit<Urql.UseQueryArgs<ProductListQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<ProductListQuery>({ query: ProductListDocument, ...options });
 };

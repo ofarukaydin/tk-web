@@ -6,6 +6,7 @@ import { LoginMutation, MeQuery, MeDocument } from "generated/graphql";
 import Router from "next/router";
 import { pipe, tap } from "wonka";
 import { withUrqlClient, NextUrqlClientConfig } from "next-urql";
+import { isServer } from "util/isServer";
 
 const errorExchange: Exchange = ({ forward }) => (ops$) => {
   return pipe(
@@ -25,11 +26,17 @@ export const createUrqlClient: NextUrqlClientConfig = (ssrExchange, ctx) => {
   return {
     url: "http://localhost:4000/graphql",
     exchanges: [
+      devtoolsExchange,
       dedupExchange,
       cacheExchange({
         updates: {
           Mutation: {
-            login: (result, args, cache, info) => {
+            postApiV1AuthenticationValidateuser: (
+              result,
+              args,
+              cache,
+              info
+            ) => {
               betterUpdateQuery<LoginMutation, MeQuery>(
                 cache,
                 {
@@ -37,19 +44,25 @@ export const createUrqlClient: NextUrqlClientConfig = (ssrExchange, ctx) => {
                 },
                 result,
                 (result, query) => {
-                  if (!result.postApiV1AuthenticationValidateuser?.result) {
-                    return query;
-                  } else {
+                  if (result?.postApiV1AuthenticationValidateuser?.response) {
+                    const {
+                      token,
+                      tokenExpireDate,
+                      refreshToken,
+                      __typename,
+                      ...meResponse
+                    } = result.postApiV1AuthenticationValidateuser.response;
                     const me: MeQuery = {
                       getApiV1AuthenticationGetuserdetails: {
                         response: {
-                          ...result.postApiV1AuthenticationValidateuser
-                            .response,
+                          ...meResponse,
                         },
                       },
-                    } as MeQuery;
+                    };
 
                     return me;
+                  } else {
+                    return query;
                   }
                 }
               );
@@ -60,15 +73,14 @@ export const createUrqlClient: NextUrqlClientConfig = (ssrExchange, ctx) => {
       errorExchange,
       ssrExchange,
       fetchExchange,
-      devtoolsExchange,
     ],
     fetchOptions: () => {
       const token = getToken();
       return {
         headers: {
-          Authorization: ctx
-            ? `Bearer ${ctx?.req?.headers?.Authorization ?? ""}`
-            : token ?? "",
+          Authorization: `Bearer ${
+            isServer() ? ctx?.req?.headers?.Authorization : token
+          }`,
         },
       };
     },
