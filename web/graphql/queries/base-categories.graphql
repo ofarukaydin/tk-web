@@ -2,7 +2,7 @@ query GetBaseCategories {
   getApiV1ProductGetbasecategories {
     response {
       baseCategories {
-        categoryUrl
+        id
         description
         icon
         name

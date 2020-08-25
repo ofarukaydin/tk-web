@@ -1678,7 +1678,7 @@ export type GetBaseCategoriesQuery = (
       { __typename?: 'Response33' }
       & { baseCategories?: Maybe<Array<Maybe<(
         { __typename?: 'GetCategoryReponseItemDTO' }
-        & Pick<GetCategoryReponseItemDto, 'categoryUrl' | 'description' | 'icon' | 'name'>
+        & Pick<GetCategoryReponseItemDto, 'id' | 'description' | 'icon' | 'name'>
       )>>> }
     )> }
   )> }
@@ -1769,7 +1769,7 @@ export const GetBaseCategoriesDocument = gql`
   getApiV1ProductGetbasecategories {
     response {
       baseCategories {
-        categoryUrl
+        id
         description
         icon
         name

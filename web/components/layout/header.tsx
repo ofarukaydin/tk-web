@@ -8,6 +8,7 @@ import Searchbar from "components/searchbar";
 import { Response5 } from "generated/graphql";
 import React from "react";
 import "twin.macro";
+import Link from "next/link";
 
 type PropTypes = {
   user?: Response5 | null;
@@ -25,7 +26,11 @@ const Header = ({ user }: PropTypes) => {
       />
       <div tw="container mx-auto flex items-center w-full justify-center h-24 py-6 ">
         <div tw="w-2/12">
-          <Logo />
+          <Link href="/">
+            <a>
+              <Logo />
+            </a>
+          </Link>
         </div>
         <div tw="w-5/12">
           <Searchbar />

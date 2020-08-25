@@ -25,7 +25,7 @@ const Index = () => {
     <SmallCard
       key={el?.name}
       title={el?.name || ""}
-      href={el?.categoryUrl || ""}
+      href={`/category/${el?.id}`}
       imageSrc={el?.icon || ""}
     />
   ));

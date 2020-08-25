@@ -1,9 +1,9 @@
 import "twin.macro";
 import { useMeQuery } from "generated/graphql";
 import { isServer } from "util/isServer";
-import Header from "components/header";
-import Footer from "components/footer";
-import Wrapper from "components/layout";
+import Header from "components/layout/header";
+import Footer from "components/layout/footer";
+import Wrapper from "components/layout/wrapper";
 import { WrapperVariant } from "components/layout/wrapper";
 
 type PropTypes = {
