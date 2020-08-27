@@ -1,20 +1,19 @@
-import "twin.macro";
-import Layout from "components/layout";
-import ProductCardWide from "components/product-card-wide";
-import { useGetUserBasketQuery, useMeQuery } from "generated/graphql";
-import { withUrql } from "util/client";
-import Link from "next/link";
+import 'twin.macro';
+import Layout from 'components/layout';
+import ProductCardWide from 'components/product-card-wide';
+import { useGetUserBasketQuery, useMeQuery } from 'generated/graphql';
+import { withUrql } from 'util/client';
+import Link from 'next/link';
 
-const BasketPage = () => {
+const BasketPage = (): JSX.Element => {
   const [{ data: meData }] = useMeQuery();
 
-  const addressId =
-    meData?.getApiV1AuthenticationGetuserdetails?.response?.addressId;
+  const addressId = meData?.getApiV1AuthenticationGetuserdetails?.response?.addressId;
 
   const [{ data }] = useGetUserBasketQuery({
     pause: !addressId,
     variables: {
-      addressId: addressId,
+      addressId,
     },
   });
   const basket = data?.getApiV1BasketGetuserbasketbyaddressidasync?.response;
@@ -31,8 +30,7 @@ const BasketPage = () => {
           <div tw="flex justify-end items-center text-gray-500">
             <div>
               <p tw="text-lg font-semibold ">
-                Toplam Tutar:{" "}
-                <span tw="text-green-600">{basket?.totalAmount}₺</span>
+                Toplam Tutar: <span tw="text-green-600">{basket?.totalAmount}₺</span>
               </p>
 
               <p tw="text-sm">
@@ -44,7 +42,7 @@ const BasketPage = () => {
             </div>
             <Link href="/address" as="/address">
               <a>
-                <button tw="m-6 bg-green-500 text-white rounded w-full py-2 w-64">
+                <button type="button" tw="m-6 bg-green-500 text-white rounded w-full py-2 w-64">
                   Devam et
                 </button>
               </a>

@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import "twin.macro";
+import { useState, useRef, useEffect } from 'react';
+import 'twin.macro';
 
-const SearhIcon = () => (
+const SearhIcon = (): JSX.Element => (
   <svg width={20} height={19} viewBox="0 0 20 19" fill="none">
     <g clipPath="url(#prefix__clip0)">
       <path
@@ -17,8 +17,8 @@ const SearhIcon = () => (
   </svg>
 );
 
-const Searchbar = () => {
-  const [searchValue, setSearchValue] = useState("");
+const Searchbar = (): JSX.Element => {
+  const [searchValue, setSearchValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const Searchbar = () => {
         }
       }
     }, 500);
+
     return () => {
       clearTimeout(timer);
     };

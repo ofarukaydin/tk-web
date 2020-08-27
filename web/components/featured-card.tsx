@@ -1,4 +1,4 @@
-import "twin.macro";
+import 'twin.macro';
 
 type PropTypes = {
   title: string;
@@ -6,7 +6,7 @@ type PropTypes = {
   bg: string;
 };
 
-const FeaturedCard = (props: PropTypes) => (
+const FeaturedCard = (props: PropTypes): JSX.Element => (
   <div
     css={{
       background: props.bg,
@@ -16,12 +16,15 @@ const FeaturedCard = (props: PropTypes) => (
   >
     <div tw="flex justify-center flex-col w-1/2">
       <p tw="text-white text-2xl font-medium ">{props.title}</p>
-      <button tw="rounded-xl bg-white w-20 h-8 mt-4 hover:cursor-pointer hover:bg-black">
+      <button
+        type="button"
+        tw="rounded-xl bg-white w-20 h-8 mt-4 hover:cursor-pointer hover:bg-black"
+      >
         <span
           css={{
             background: props.bg,
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
           İncele

@@ -1,5 +1,5 @@
-import "twin.macro";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import 'twin.macro';
+import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 type PropTypes = {
   fullName: string;
@@ -7,7 +7,7 @@ type PropTypes = {
   geolocation: [number, number];
 };
 
-const Address = ({ fullName, address, geolocation }: PropTypes) => {
+const Address = ({ fullName, address, geolocation }: PropTypes): JSX.Element => {
   return (
     <div css={{ minHeight: 320 }} tw="flex rounded-xl shadow-tk2 w-full">
       <div tw="p-8 w-1/3 text-gray-400">
@@ -16,7 +16,7 @@ const Address = ({ fullName, address, geolocation }: PropTypes) => {
       </div>
       <div tw="w-2/3">
         {geolocation?.[0] && (
-          <YMaps query={{ lang: "tr_TR" }}>
+          <YMaps query={{ lang: 'tr_TR' }}>
             <Map
               width="100%"
               height="100%"

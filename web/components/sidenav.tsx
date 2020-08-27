@@ -1,6 +1,6 @@
-import "twin.macro";
-import Link from "next/link";
-import { Maybe, SubCategoryWithProductsDto } from "generated/graphql";
+import 'twin.macro';
+import Link from 'next/link';
+import { Maybe, SubCategoryWithProductsDto } from 'generated/graphql';
 
 type CategoryItem = {
   name: string;
@@ -15,25 +15,26 @@ type PropTypes = {
   baseCategoryId?: string;
 };
 
-const NavItem = ({ name, url, count }: CategoryItem) => (
+const NavItem = ({ name, url, count = 0 }: CategoryItem): JSX.Element => (
   <li tw="py-4 px-6 ">
     <Link href="/category/[...param]" as={url}>
       <a>
-        {name} {count! > 0 && <span tw="text-green-500">({count})</span>}{" "}
+        {name} {count > 0 && <span tw="text-green-500">({count})</span>}{' '}
       </a>
     </Link>
   </li>
 );
 
-const SideNav = ({ items, subTitle, title, baseCategoryId }: PropTypes) => {
+const SideNav = ({ items, subTitle, title, baseCategoryId }: PropTypes): JSX.Element => {
   const navItems = items.map((el) => (
     <NavItem
       key={el?.id}
-      name={el?.name || ""}
+      name={el?.name || ''}
       url={`/category/${baseCategoryId}/${el?.id}`}
       count={el?.products?.length}
     />
   ));
+
   return (
     <div tw="border rounded-xl shadow-tk2">
       <div tw="bg-gray-700 py-4 px-4 rounded-t-xl ">

@@ -1,9 +1,7 @@
-import "twin.macro";
-import { RemoveItem } from "components/icons";
+import 'twin.macro';
+import { RemoveItem } from 'components/icons';
 
-type PropTypes = {};
-
-const MyCart = ({}: PropTypes) => {
+const MyCart = (): JSX.Element => {
   return (
     <div tw="rounded-xl shadow-tk2 bg-white">
       <div tw="p-6 flex justify-between items-center">
@@ -14,7 +12,7 @@ const MyCart = ({}: PropTypes) => {
       <div tw="divide-y divide-gray-100">
         <div tw="flex py-6 px-4">
           <div tw="border rounded-lg border-gray-100">
-            <img src="/ananas.png" width="65" height="65" />
+            <img alt="banana" src="/ananas.png" width="65" height="65" />
           </div>
           <div tw="ml-4">
             <p tw="text-gray-500 font-semibold">Portakal</p>
@@ -23,7 +21,7 @@ const MyCart = ({}: PropTypes) => {
         </div>
         <div tw="flex py-6 px-4">
           <div tw="border rounded-lg border-gray-100">
-            <img src="/ananas.png" width="65" height="65" />
+            <img alt="banana" src="/ananas.png" width="65" height="65" />
           </div>
           <div tw="ml-4">
             <p tw="text-gray-500 font-semibold">Portakal</p>
@@ -32,7 +30,7 @@ const MyCart = ({}: PropTypes) => {
         </div>
         <div tw="flex py-6 px-4">
           <div tw="border rounded-lg border-gray-100">
-            <img src="/ananas.png" width="65" height="65" />
+            <img alt="banana" src="/ananas.png" width="65" height="65" />
           </div>
           <div tw="ml-4">
             <p tw="text-gray-500 font-semibold">Portakal</p>

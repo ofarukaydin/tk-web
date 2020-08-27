@@ -1,16 +1,21 @@
-import "twin.macro";
-import { Maybe } from "graphql/jsutils/Maybe";
-import { BasketItemListDto } from "generated/graphql";
+import 'twin.macro';
+import { Maybe } from 'graphql/jsutils/Maybe';
+import { BasketItemListDto } from 'generated/graphql';
 
 type PropTypes = {
   product: Maybe<BasketItemListDto> | undefined;
 };
 
-const ProductCardWide = ({ product }: PropTypes) => {
+const ProductCardWide = ({ product }: PropTypes): JSX.Element => {
   return (
     <div tw="flex py-6 px-6 mt-2 items-center rounded-lg border justify-between">
       <div tw="flex">
-        <img src={product?.productImage || ""} width="65" height="65" />
+        <img
+          alt={product?.productName || ''}
+          src={product?.productImage || ''}
+          width="65"
+          height="65"
+        />
         <div tw="ml-4">
           <p tw="text-gray-500 font-semibold">{product?.productName}</p>
           <p tw="text-green-600 text-lg font-bold ">{product?.price}₺</p>

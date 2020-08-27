@@ -1,19 +1,15 @@
-import "twin.macro";
-import Layout from "components/layout";
-import SideNav from "components/sidenav";
-import MyCart from "components/my-cart";
-import Wrapper from "components/layout/wrapper";
-import AddCard from "components/card-add";
-import {
-  useProductListQuery,
-  useMeQuery,
-  useAddProductToBasketMutation,
-} from "generated/graphql";
-import { withUrql } from "util/client";
-import { useRouter } from "next/router";
-import { isServer } from "util/isServer";
+import 'twin.macro';
+import Layout from 'components/layout';
+import SideNav from 'components/sidenav';
+import MyCart from 'components/my-cart';
+import Wrapper from 'components/layout/wrapper';
+import AddCard from 'components/card-add';
+import { useProductListQuery, useMeQuery, useAddProductToBasketMutation } from 'generated/graphql';
+import { withUrql } from 'util/client';
+import { useRouter } from 'next/router';
+import { isServer } from 'util/is-server';
 
-const CategoriesPage = () => {
+const CategoriesPage = (): JSX.Element => {
   const router = useRouter();
   const baseCategoryIdFromQuery = router.query?.param?.[0];
   const subCategoryIdFromQuery = router.query?.param?.[1];
@@ -34,15 +30,12 @@ const CategoriesPage = () => {
   const [, addProductToBasket] = useAddProductToBasketMutation();
 
   const subCategories =
-    productListResponse.data
-      ?.getApiV1ProductGetsubcategorieswithproductsandcategory?.response
+    productListResponse.data?.getApiV1ProductGetsubcategorieswithproductsandcategory?.response
       ?.data || [];
 
   const concatinatedProducts = subCategories.flatMap((el) => el?.products);
 
-  const currentSubCategory = subCategories.filter(
-    (el) => el?.id === subCategoryIdFromQuery
-  )[0];
+  const currentSubCategory = subCategories.find((el) => el?.id === subCategoryIdFromQuery);
 
   const productsInCurrentSubCategory = (
     currentSubCategory?.products ||
@@ -53,24 +46,26 @@ const CategoriesPage = () => {
       key={product?.productItemId}
       product={product}
       onClick={() => {
-        console.log("clicked, options: ", {
-          addressId: parseInt(
-            data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+        console.log('clicked, options:', {
+          addressId: Number.parseInt(
+            data?.getApiV1AuthenticationGetuserdetails?.response?.addressId,
+            10,
           ),
           basketItem: {
-            productId: parseInt(product?.productId),
-            productItemId: parseInt(product?.productItemId),
+            productId: Number.parseInt(product?.productId, 10),
+            productItemId: Number.parseInt(product?.productItemId, 10),
             quantity: 1,
           },
         });
         addProductToBasket({
           options: {
-            addressId: parseInt(
-              data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+            addressId: Number.parseInt(
+              data?.getApiV1AuthenticationGetuserdetails?.response?.addressId,
+              10,
             ),
             basketItem: {
-              productId: parseInt(product?.productId),
-              productItemId: parseInt(product?.productItemId),
+              productId: Number.parseInt(product?.productId, 10),
+              productItemId: Number.parseInt(product?.productItemId, 10),
               quantity: 1,
             },
           },
@@ -96,9 +91,7 @@ const CategoriesPage = () => {
               </div>
             </div>
             <div tw="w-2/3 ml-6">
-              <div tw="grid grid-cols-4 gap-4 w-full">
-                {productsInCurrentSubCategory}
-              </div>
+              <div tw="grid grid-cols-4 gap-4 w-full">{productsInCurrentSubCategory}</div>
             </div>
           </div>
         ) : (

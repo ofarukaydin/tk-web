@@ -1,4 +1,10 @@
 {
   "editor.fontSize": 14,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.workingDirectories": ["server", "web"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.insertFinalNewline": true,
+  "html.format.maxPreserveNewLines": null
 }

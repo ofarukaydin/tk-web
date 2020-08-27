@@ -1,8 +1,8 @@
-import type { AppProps /*, AppContext */ } from "next/app";
-import "react-image-gallery/styles/css/image-gallery.css";
-import "tailwindcss/dist/base.min.css";
+import type { AppProps } from 'next/app';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import 'tailwindcss/dist/base.min.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />;
 }
 
