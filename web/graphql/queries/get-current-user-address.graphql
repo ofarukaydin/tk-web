@@ -1,0 +1,28 @@
+query GetCurrentUserAddress {
+  getApiV1AuthenticationGetcurrentuseraddress {
+    result
+    messages {
+      code
+      message
+    }
+    response {
+      addressType
+      building
+      cityId
+      contactTitle
+      countryId
+      creationTime
+      creatorUserId
+      department
+      description
+      districtId
+      fullAddress
+      id
+      isCurrent
+      latitude
+      longitude
+      neighborhood
+      street
+    }
+  }
+}

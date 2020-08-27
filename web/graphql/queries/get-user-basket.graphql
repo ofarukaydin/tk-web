@@ -1,0 +1,30 @@
+query GetUserBasket($addressId: BigInt!) {
+  getApiV1BasketGetuserbasketbyaddressidasync(addressId: $addressId) {
+    messages {
+      code
+      message
+    }
+    result
+    response {
+      amount
+      discount
+      freeShipping
+      freeShippingLimit
+      isMinAmount
+      items {
+        price
+        productId
+        productImage
+        productItemId
+        productName
+        quantity
+        stockStatus
+        stockStatusMessage
+      }
+      shippingPrice
+      statusMessage
+      totalAmount
+      userId
+    }
+  }
+}

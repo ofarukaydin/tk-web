@@ -3,6 +3,7 @@ import { Maybe, ProductItemListDto } from "generated/graphql";
 
 type PropTypes = {
   product: Maybe<ProductItemListDto> | undefined;
+  onClick: () => void;
 };
 
 const PlusBox = () => (
@@ -20,12 +21,13 @@ const PlusBox = () => (
   </svg>
 );
 
-const AddCard = ({ product }: PropTypes) => {
+const AddCard = ({ product, onClick }: PropTypes) => {
   return (
     <div tw="relative rounded-lg shadow-tk2 w-full bg-white flex flex-col justify-between pb-4">
       <div
         css={{ top: 10, right: 10 }}
         tw="hover:cursor-pointer absolute p-2 shadow-tk1 rounded-xl hover:bg-gray-100"
+        onClick={onClick}
       >
         <PlusBox />
       </div>

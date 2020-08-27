@@ -4,9 +4,14 @@ import SideNav from "components/sidenav";
 import MyCart from "components/my-cart";
 import Wrapper from "components/layout/wrapper";
 import AddCard from "components/card-add";
-import { useProductListQuery } from "generated/graphql";
+import {
+  useProductListQuery,
+  useMeQuery,
+  useAddProductToBasketMutation,
+} from "generated/graphql";
 import { withUrql } from "util/client";
 import { useRouter } from "next/router";
+import { isServer } from "util/isServer";
 
 const CategoriesPage = () => {
   const router = useRouter();
@@ -21,6 +26,12 @@ const CategoriesPage = () => {
     },
     pause: !baseCategoryIdFromQuery,
   });
+
+  const [{ data }] = useMeQuery({
+    pause: isServer(),
+  });
+
+  const [, addProductToBasket] = useAddProductToBasketMutation();
 
   const subCategories =
     productListResponse.data
@@ -38,7 +49,34 @@ const CategoriesPage = () => {
     concatinatedProducts ||
     []
   ).map((product) => (
-    <AddCard key={product?.productItemId} product={product} />
+    <AddCard
+      key={product?.productItemId}
+      product={product}
+      onClick={() => {
+        console.log("clicked, options: ", {
+          addressId: parseInt(
+            data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+          ),
+          basketItem: {
+            productId: parseInt(product?.productId),
+            productItemId: parseInt(product?.productItemId),
+            quantity: 1,
+          },
+        });
+        addProductToBasket({
+          options: {
+            addressId: parseInt(
+              data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+            ),
+            basketItem: {
+              productId: parseInt(product?.productId),
+              productItemId: parseInt(product?.productItemId),
+              quantity: 1,
+            },
+          },
+        });
+      }}
+    />
   ));
 
   return (

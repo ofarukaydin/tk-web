@@ -1,0 +1,30 @@
+mutation AddProductToBasket($options: InsertBasketItemRequestDTOInput!) {
+  postApiV1BasketInsertbasketitem(insertBasketItemRequestDTOInput: $options) {
+    messages {
+      code
+      message
+    }
+    response {
+      amount
+      discount
+      freeShipping
+      freeShippingLimit
+      isMinAmount
+      items {
+        price
+        productId
+        productImage
+        productItemId
+        productName
+        quantity
+        stockStatus
+        stockStatusMessage
+      }
+      shippingPrice
+      statusMessage
+      totalAmount
+      userId
+    }
+    result
+  }
+}

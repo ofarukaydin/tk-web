@@ -1645,6 +1645,30 @@ export type UpdateCarrierTrackingInfoRequestDtoInput = {
   longitude?: Maybe<Scalars['Float']>;
 };
 
+export type AddProductToBasketMutationVariables = Exact<{
+  options: InsertBasketItemRequestDtoInput;
+}>;
+
+
+export type AddProductToBasketMutation = (
+  { __typename?: 'Mutation' }
+  & { postApiV1BasketInsertbasketitem?: Maybe<(
+    { __typename?: 'BasketInfoDTOOperationResultDTO' }
+    & Pick<BasketInfoDtoOperationResultDto, 'result'>
+    & { messages?: Maybe<Array<Maybe<(
+      { __typename?: 'OperationResultMessage' }
+      & Pick<OperationResultMessage, 'code' | 'message'>
+    )>>>, response?: Maybe<(
+      { __typename?: 'Response9' }
+      & Pick<Response9, 'amount' | 'discount' | 'freeShipping' | 'freeShippingLimit' | 'isMinAmount' | 'shippingPrice' | 'statusMessage' | 'totalAmount' | 'userId'>
+      & { items?: Maybe<Array<Maybe<(
+        { __typename?: 'BasketItemListDTO' }
+        & Pick<BasketItemListDto, 'price' | 'productId' | 'productImage' | 'productItemId' | 'productName' | 'quantity' | 'stockStatus' | 'stockStatusMessage'>
+      )>>> }
+    )> }
+  )> }
+);
+
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -1679,6 +1703,48 @@ export type GetBaseCategoriesQuery = (
       & { baseCategories?: Maybe<Array<Maybe<(
         { __typename?: 'GetCategoryReponseItemDTO' }
         & Pick<GetCategoryReponseItemDto, 'id' | 'description' | 'icon' | 'name'>
+      )>>> }
+    )> }
+  )> }
+);
+
+export type GetCurrentUserAddressQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserAddressQuery = (
+  { __typename?: 'Query' }
+  & { getApiV1AuthenticationGetcurrentuseraddress?: Maybe<(
+    { __typename?: 'UserAddressItemResponseDTOOperationResultDTO' }
+    & Pick<UserAddressItemResponseDtoOperationResultDto, 'result'>
+    & { messages?: Maybe<Array<Maybe<(
+      { __typename?: 'OperationResultMessage' }
+      & Pick<OperationResultMessage, 'code' | 'message'>
+    )>>>, response?: Maybe<(
+      { __typename?: 'Response7' }
+      & Pick<Response7, 'addressType' | 'building' | 'cityId' | 'contactTitle' | 'countryId' | 'creationTime' | 'creatorUserId' | 'department' | 'description' | 'districtId' | 'fullAddress' | 'id' | 'isCurrent' | 'latitude' | 'longitude' | 'neighborhood' | 'street'>
+    )> }
+  )> }
+);
+
+export type GetUserBasketQueryVariables = Exact<{
+  addressId: Scalars['BigInt'];
+}>;
+
+
+export type GetUserBasketQuery = (
+  { __typename?: 'Query' }
+  & { getApiV1BasketGetuserbasketbyaddressidasync?: Maybe<(
+    { __typename?: 'BasketInfoDTOOperationResultDTO' }
+    & Pick<BasketInfoDtoOperationResultDto, 'result'>
+    & { messages?: Maybe<Array<Maybe<(
+      { __typename?: 'OperationResultMessage' }
+      & Pick<OperationResultMessage, 'code' | 'message'>
+    )>>>, response?: Maybe<(
+      { __typename?: 'Response9' }
+      & Pick<Response9, 'amount' | 'discount' | 'freeShipping' | 'freeShippingLimit' | 'isMinAmount' | 'shippingPrice' | 'statusMessage' | 'totalAmount' | 'userId'>
+      & { items?: Maybe<Array<Maybe<(
+        { __typename?: 'BasketItemListDTO' }
+        & Pick<BasketItemListDto, 'price' | 'productId' | 'productImage' | 'productItemId' | 'productName' | 'quantity' | 'stockStatus' | 'stockStatusMessage'>
       )>>> }
     )> }
   )> }
@@ -1736,6 +1802,42 @@ export type ProductListQuery = (
 );
 
 
+export const AddProductToBasketDocument = gql`
+    mutation AddProductToBasket($options: InsertBasketItemRequestDTOInput!) {
+  postApiV1BasketInsertbasketitem(insertBasketItemRequestDTOInput: $options) {
+    messages {
+      code
+      message
+    }
+    response {
+      amount
+      discount
+      freeShipping
+      freeShippingLimit
+      isMinAmount
+      items {
+        price
+        productId
+        productImage
+        productItemId
+        productName
+        quantity
+        stockStatus
+        stockStatusMessage
+      }
+      shippingPrice
+      statusMessage
+      totalAmount
+      userId
+    }
+    result
+  }
+}
+    `;
+
+export function useAddProductToBasketMutation() {
+  return Urql.useMutation<AddProductToBasketMutation, AddProductToBasketMutationVariables>(AddProductToBasketDocument);
+};
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!, $userTypeId: Int!) {
   postApiV1AuthenticationValidateuser(validateUserRequestDTOInput: {username: $username, password: $password, userTypeId: $userTypeId}) {
@@ -1781,6 +1883,76 @@ export const GetBaseCategoriesDocument = gql`
 
 export function useGetBaseCategoriesQuery(options: Omit<Urql.UseQueryArgs<GetBaseCategoriesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetBaseCategoriesQuery>({ query: GetBaseCategoriesDocument, ...options });
+};
+export const GetCurrentUserAddressDocument = gql`
+    query GetCurrentUserAddress {
+  getApiV1AuthenticationGetcurrentuseraddress {
+    result
+    messages {
+      code
+      message
+    }
+    response {
+      addressType
+      building
+      cityId
+      contactTitle
+      countryId
+      creationTime
+      creatorUserId
+      department
+      description
+      districtId
+      fullAddress
+      id
+      isCurrent
+      latitude
+      longitude
+      neighborhood
+      street
+    }
+  }
+}
+    `;
+
+export function useGetCurrentUserAddressQuery(options: Omit<Urql.UseQueryArgs<GetCurrentUserAddressQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCurrentUserAddressQuery>({ query: GetCurrentUserAddressDocument, ...options });
+};
+export const GetUserBasketDocument = gql`
+    query GetUserBasket($addressId: BigInt!) {
+  getApiV1BasketGetuserbasketbyaddressidasync(addressId: $addressId) {
+    messages {
+      code
+      message
+    }
+    result
+    response {
+      amount
+      discount
+      freeShipping
+      freeShippingLimit
+      isMinAmount
+      items {
+        price
+        productId
+        productImage
+        productItemId
+        productName
+        quantity
+        stockStatus
+        stockStatusMessage
+      }
+      shippingPrice
+      statusMessage
+      totalAmount
+      userId
+    }
+  }
+}
+    `;
+
+export function useGetUserBasketQuery(options: Omit<Urql.UseQueryArgs<GetUserBasketQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserBasketQuery>({ query: GetUserBasketDocument, ...options });
 };
 export const MeDocument = gql`
     query Me {

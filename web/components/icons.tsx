@@ -124,3 +124,19 @@ export const RemoveItem = () => (
     />
   </svg>
 );
+
+export const NoteIcon = () => (
+  <svg width={27} height={24} viewBox="0 0 27 24" fill="none">
+    <g clipPath="url(#prefix__clip0)">
+      <path
+        d="M19 3H5a3 3 0 00-3 3v15a1 1 0 001.51.86L8 19.14a1 1 0 01.55-.14H19a3 3 0 003-3V6a3 3 0 00-3-3zM8 12a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z"
+        fill="#51AD56"
+      />
+    </g>
+    <defs>
+      <clipPath id="prefix__clip0">
+        <path fill="#fff" transform="translate(.9)" d="M0 0h25.439v24H0z" />
+      </clipPath>
+    </defs>
+  </svg>
+);

@@ -5,16 +5,17 @@ import {
   ShoppingCartIcon,
 } from "components/icons";
 import Searchbar from "components/searchbar";
-import { Response5 } from "generated/graphql";
+import { Response5, Response9 } from "generated/graphql";
 import React from "react";
 import "twin.macro";
 import Link from "next/link";
 
 type PropTypes = {
   user?: Response5 | null;
+  basket?: Response9 | null;
 };
 
-const Header = ({ user }: PropTypes) => {
+const Header = ({ user, basket }: PropTypes) => {
   return (
     <header tw="shadow-tk2">
       <div
@@ -47,12 +48,16 @@ const Header = ({ user }: PropTypes) => {
             <p tw="text-gray-500 font-bold">Hesabim</p>
           </div>
         </div>
-        <div tw="flex w-2/12 items-center  hover:bg-gray-100 hover:rounded-lg p-2">
-          <ShoppingCartIcon />
-          <div tw="ml-2">
-            <p tw="text-gray-400 text-xs">Sepet Tutari</p>
-            <p tw="text-gray-500 font-bold">33.16TL</p>
-          </div>
+        <div tw="w-2/12 hover:bg-gray-100 hover:rounded-lg p-2 hover:cursor-pointer">
+          <Link href="/basket" as="/basket">
+            <a tw="flex items-center">
+              <ShoppingCartIcon />
+              <div tw="ml-2">
+                <p tw="text-gray-400 text-xs">Sepet Tutari</p>
+                <p tw="text-gray-500 font-bold">{basket?.amount || 0} ₺</p>
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
     </header>

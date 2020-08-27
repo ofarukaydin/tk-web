@@ -4,6 +4,8 @@ import SmallCard from "components/card-small";
 import {
   useGetBaseCategoriesQuery,
   useProductListQuery,
+  useAddProductToBasketMutation,
+  useMeQuery,
 } from "generated/graphql";
 import AddCard from "components/card-add";
 import AdHome from "components/ad-home";
@@ -11,12 +13,17 @@ import SlideShow from "components/slideshow";
 import { withUrqlSsr } from "util/client";
 import Layout from "components/layout";
 import Wrapper from "components/layout/wrapper";
+import { isServer } from "util/isServer";
 
 const Index = () => {
   const [baseCategoriesResponse] = useGetBaseCategoriesQuery();
   const [productListResponse] = useProductListQuery({
     variables: { merchantBranchId: 3, parentCategoryId: 1 },
   });
+  const [{ data }] = useMeQuery({
+    pause: isServer(),
+  });
+  const [, addProductToBasket] = useAddProductToBasketMutation();
 
   const categories = (
     baseCategoriesResponse.data?.getApiV1ProductGetbasecategories?.response
@@ -35,7 +42,36 @@ const Index = () => {
       ?.getApiV1ProductGetsubcategorieswithproductsandcategory?.response
       ?.data?.[0]?.products || []
   ).map((product) => {
-    return <AddCard key={product?.productItemId} product={product} />;
+    return (
+      <AddCard
+        key={product?.productItemId}
+        product={product}
+        onClick={() => {
+          console.log("clicked, options: ", {
+            addressId: parseInt(
+              data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+            ),
+            basketItem: {
+              productId: parseInt(product?.productId),
+              productItemId: parseInt(product?.productItemId),
+              quantity: 1,
+            },
+          });
+          addProductToBasket({
+            options: {
+              addressId: parseInt(
+                data?.getApiV1AuthenticationGetuserdetails?.response?.addressId
+              ),
+              basketItem: {
+                productId: parseInt(product?.productId),
+                productItemId: parseInt(product?.productItemId),
+                quantity: product?.unit,
+              },
+            },
+          });
+        }}
+      />
+    );
   });
 
   return (

@@ -28,7 +28,7 @@ const Login = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={async (values, { setErrors }) => {
-            const response = await login({ ...values, userTypeId: 3 });
+            const response = await login({ ...values, userTypeId: 1 });
             if (response.data?.postApiV1AuthenticationValidateuser?.result) {
               setToken(
                 response.data.postApiV1AuthenticationValidateuser.response

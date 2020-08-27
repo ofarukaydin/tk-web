@@ -1,5 +1,5 @@
 import "twin.macro";
-import { useMeQuery } from "generated/graphql";
+import { useMeQuery, useGetUserBasketQuery } from "generated/graphql";
 import { isServer } from "util/isServer";
 import Header from "components/layout/header";
 import Footer from "components/layout/footer";
@@ -12,14 +12,24 @@ type PropTypes = {
 };
 
 const Layout = ({ children, container }: PropTypes) => {
-  const [{ data }] = useMeQuery({
+  const [{ data: meData }] = useMeQuery({
     pause: isServer(),
   });
+  const addressId =
+    meData?.getApiV1AuthenticationGetuserdetails?.response?.addressId;
 
-  const user = data?.getApiV1AuthenticationGetuserdetails?.response;
+  const [{ data }] = useGetUserBasketQuery({
+    pause: !addressId,
+    variables: {
+      addressId: addressId,
+    },
+  });
+  const basket = data?.getApiV1BasketGetuserbasketbyaddressidasync?.response;
+
+  const user = meData?.getApiV1AuthenticationGetuserdetails?.response;
   return (
     <main tw="min-h-screen flex flex-col">
-      <Header user={user} />
+      <Header user={user} basket={basket} />
       <Wrapper container={container}>{children}</Wrapper>
       <Footer />
     </main>
