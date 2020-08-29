@@ -78,8 +78,8 @@ const CategoriesPage = (): JSX.Element => {
     <Layout container="none">
       <Wrapper>
         {baseCategoryIdFromQuery ? (
-          <div tw="flex">
-            <div tw="w-1/3">
+          <div tw="md:flex sm:block">
+            <div tw="md:w-1/3">
               <SideNav
                 title="Kategoriler"
                 subTitle={currentSubCategory?.name}
@@ -90,8 +90,10 @@ const CategoriesPage = (): JSX.Element => {
                 <MyCart />
               </div>
             </div>
-            <div tw="w-2/3 ml-6">
-              <div tw="grid grid-cols-4 gap-4 w-full">{productsInCurrentSubCategory}</div>
+            <div tw="md:w-2/3 md:ml-6">
+              <div tw="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+                {productsInCurrentSubCategory}
+              </div>
             </div>
           </div>
         ) : (

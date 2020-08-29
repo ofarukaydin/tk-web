@@ -4,79 +4,79 @@ import Link from 'next/link';
 
 const Footer = (): JSX.Element => (
   <footer tw="bg-gray-700 text-white pt-8">
-    <div tw="flex flex-wrap -mx-2 bg-gray-700 container mx-auto">
-      <div tw="pt-4 w-1/3">
+    <div tw="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full bg-gray-700 container mx-auto">
+      <div tw="mt-2 sm:hidden xl:block">
         <LogoWhite />
-        <div tw="flex -mx-2 mt-4">
+        <div tw="flex mt-4">
           <img src="/android.png" alt="android" />
           <img src="/ios.png" alt="ios" />
         </div>
       </div>
 
-      <div tw="my-2 px-2 w-1/6 ">
-        <p tw="font-bold my-2 px-2 text-xl">Hakkımızda</p>
+      <div>
+        <p tw="font-bold text-xl">Hakkımızda</p>
         <Link href="/">
-          <a tw="my-2 px-2 block">Anasayfa</a>
+          <a tw="block">Anasayfa</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">Hakkımızda</a>
+          <a tw="block">Hakkımızda</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">Kampanyalar</a>
+          <a tw="block">Kampanyalar</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">İletişim</a>
-        </Link>
-      </div>
-
-      <div tw="my-2 px-2 w-1/6 ">
-        <p tw="font-bold my-2 px-2 w-full text-xl">Hesabım</p>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Meyve & Sebzeler</a>
-        </Link>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Atıştırmalıklar</a>
-        </Link>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Hızlı Yemek</a>
-        </Link>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Et Ürünleri</a>
-        </Link>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Süt Ürünleri</a>
-        </Link>
-        <Link href="/">
-          <a tw="my-2 px-2 block">Temel Gıda</a>
+          <a tw="block">İletişim</a>
         </Link>
       </div>
 
-      <div tw="my-2 px-2 w-1/6 ">
-        <p tw="font-bold my-2 px-2 block text-xl">Hesabım</p>
+      <div>
+        <p tw="font-bold w-full text-xl">Hesabım</p>
         <Link href="/">
-          <a tw="my-2 px-2 block">Profilim</a>
+          <a tw="block">Meyve & Sebzeler</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">Siparişlerim</a>
+          <a tw="block">Atıştırmalıklar</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">Sipariş Takibi</a>
+          <a tw="block">Hızlı Yemek</a>
+        </Link>
+        <Link href="/">
+          <a tw="block">Et Ürünleri</a>
+        </Link>
+        <Link href="/">
+          <a tw="block">Süt Ürünleri</a>
+        </Link>
+        <Link href="/">
+          <a tw="block">Temel Gıda</a>
         </Link>
       </div>
 
-      <div tw="my-2 px-2 w-1/6 ">
-        <p tw="font-bold my-2 px-2 block text-xl">TK</p>
+      <div>
+        <p tw="font-bold block text-xl">Hesabım</p>
         <Link href="/">
-          <a tw="my-2 px-2 block">Gizlilik Politikası</a>
+          <a tw="block">Profilim</a>
         </Link>
         <Link href="/">
-          <a tw="my-2 px-2 block">KVKK</a>
+          <a tw="block">Siparişlerim</a>
+        </Link>
+        <Link href="/">
+          <a tw="block">Sipariş Takibi</a>
         </Link>
       </div>
-      <p tw="text-center w-full my-6">
-        © 2018 - 2020 All Right Reserved | Türkiye Tarım Kredi Kooperatifleri
-      </p>
+
+      <div>
+        <p tw="font-bold block text-xl">TK</p>
+        <Link href="/">
+          <a tw="block">Gizlilik Politikası</a>
+        </Link>
+        <Link href="/">
+          <a tw="block">KVKK</a>
+        </Link>
+      </div>
     </div>
+    <p tw="text-center w-full my-6">
+      © 2018 - 2020 All Right Reserved | Türkiye Tarım Kredi Kooperatifleri
+    </p>
   </footer>
 );
 

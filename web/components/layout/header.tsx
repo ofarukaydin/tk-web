@@ -20,28 +20,28 @@ const Header = ({ user, basket }: PropTypes): JSX.Element => {
         }}
         tw="w-full h-24 bg-no-repeat bg-center"
       />
-      <div tw="container mx-auto flex items-center w-full justify-center h-24 py-6 ">
-        <div tw="w-2/12">
+      <div tw="container mx-auto flex md:items-center w-full justify-center xl:justify-center xl:h-24 xl:py-6 ">
+        <div tw="hidden xl:block xl:w-2/12">
           <Link href="/">
             <a>
               <Logo />
             </a>
           </Link>
         </div>
-        <div tw="w-5/12">
+        <div tw="xl:w-5/12">
           <Searchbar />
         </div>
-        <div tw="w-1/12 flex justify-center hover:cursor-pointer">
+        <div tw="xl:w-1/12 hidden xl:flex xl:justify-center hover:cursor-pointer">
           <QuestionMark />
         </div>
-        <div tw="flex w-2/12 items-center hover:bg-gray-100 hover:rounded-lg p-2">
+        <div tw="hidden xl:flex  xl:w-2/12 xl:items-center hover:bg-gray-100 hover:rounded-lg p-2">
           <LoginIcon />
           <div tw="ml-2">
             <p tw="text-gray-400 text-xs">{user?.email ?? 'Giris yap & Kayit ol'}</p>
             <p tw="text-gray-500 font-bold">Hesabim</p>
           </div>
         </div>
-        <div tw="w-2/12 hover:bg-gray-100 hover:rounded-lg p-2 hover:cursor-pointer">
+        <div tw="  hover:bg-gray-100 hover:rounded-lg p-2 hover:cursor-pointer">
           <Link href="/basket" as="/basket">
             <a tw="flex items-center">
               <ShoppingCartIcon />

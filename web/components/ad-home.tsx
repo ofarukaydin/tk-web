@@ -1,7 +1,7 @@
 import 'twin.macro';
 
 const AdHome = (): JSX.Element => (
-  <div tw="flex">
+  <div tw="flex p-4">
     <div tw="w-1/2 my-auto">
       <p tw="text-2xl font-bold">Sen iste, kapına gelsin.</p>
       <p tw="text-lg my-6">
